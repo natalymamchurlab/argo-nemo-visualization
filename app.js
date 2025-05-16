@@ -4,13 +4,28 @@ let markers = [];
 let buoyData = {};
 
 function initMap() {
+    // Центр карты на Черном море
+    const blackSeaCenter = {lat: 43.5, lng: 34.5};
+    
     map = new google.maps.Map(document.getElementById('map'), {
-        center: {lat: 43.5, lng: 34.5}, // Центр Черного моря
-        zoom: 6,
-        mapTypeId: 'hybrid'
+        center: blackSeaCenter,
+        zoom: 6,  // Увеличение для хорошего обзора Черного моря
+        mapTypeId: 'hybrid',  // Спутниковый вид с подписями
+        minZoom: 5,  // Минимальное увеличение
+        maxZoom: 12  // Максимальное увеличение
     });
     
-    // Загрузка данных
+    // Дополнительные настройки стиля (опционально)
+    map.setOptions({
+        styles: [
+            {
+                featureType: "water",
+                elementType: "geometry",
+                stylers: [{color: "#1e90ff"}]
+            }
+        ]
+    });
+    
     loadBuoyData();
 }
 
