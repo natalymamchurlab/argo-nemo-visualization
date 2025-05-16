@@ -3,13 +3,11 @@ let map;
 let markers = [];
 let buoyData = {};
 
-function initMap() {
-    // Центр карты на Черном море
-    const blackSeaCenter = {lat: 43.5, lng: 34.5};
-    
+// Явно сделайте initMap глобальной функцией
+window.initMap = function() {
     map = new google.maps.Map(document.getElementById('map'), {
-        center: blackSeaCenter,
-        zoom: 6,  // Увеличение для хорошего обзора Черного моря
+        center: {lat: 43.5, lng: 34.5},
+        zoom: 6, // Увеличение для хорошего обзора Черного моря
         mapTypeId: 'hybrid',  // Спутниковый вид с подписями
         minZoom: 5,  // Минимальное увеличение
         maxZoom: 12  // Максимальное увеличение
