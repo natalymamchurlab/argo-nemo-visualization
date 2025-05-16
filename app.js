@@ -247,29 +247,6 @@ function plotTimeSeries(buoyId, depth) {
     
     Plotly.newPlot('time-series-plot', [trace1, trace2], layout);
 }
-
-// Инициализация при загрузке страницы
-document.addEventListener('DOMContentLoaded', () => {
-    // Инициализация выбора даты
-    $('#date-range').daterangepicker({
-        opens: 'left',
-        locale: {
-            format: 'YYYY-MM-DD',
-            applyLabel: 'Применить',
-            cancelLabel: 'Отмена',
-            fromLabel: 'От',
-            toLabel: 'До',
-            customRangeLabel: 'Произвольный',
-            daysOfWeek: ['Вс', 'Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб'],
-            monthNames: ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'],
-            firstDay: 1
-        }
-    });
-    
-    // Обработчик изменения буя
-    document.getElementById('buoy-select').addEventListener('change', function() {
-        initDepthSelect(this.value);
-    });
     
     // Обработчик кнопки обновления
     document.getElementById('update-btn').addEventListener('click', function() {
@@ -290,5 +267,23 @@ document.addEventListener('DOMContentLoaded', () => {
         if (filteredData.length > 0) {
             updatePlots(buoyId, new Date(filteredData[0].timeM), depth);
         }
+    });
+
+// Перенесите этот код в конец app.js
+document.addEventListener('DOMContentLoaded', function() {
+    // Инициализация только после загрузки всех элементов
+    if (typeof google !== 'undefined') {
+        initMap();
+    }
+
+    $('#date-range').daterangepicker({
+        opens: 'left',
+        locale: {
+            format: 'YYYY-MM-DD'
+        }
+    });
+
+    document.getElementById('update-btn').addEventListener('click', function() {
+        // Ваш код обработчика
     });
 });
